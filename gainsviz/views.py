@@ -152,6 +152,7 @@ def dashboard():
             d3.fillna(0, inplace=True)
             d3.loc[:, "Reps"] = d2.loc[d3["idxmax"], "Reps"].values
             d3.loc[:, "Weight"] = d2.loc[d3["idxmax"], "Weight"].values
+            d3.loc[:, "Workout Date"] = d3["idxmax"].dt.strftime("%d %B %Y")
             d3.drop(columns="idxmax", inplace=True)
             d3.rename(
                     columns={"max": "Est. 1 RM", "sum": "Total Weekly Volume"}, 
@@ -167,6 +168,7 @@ def dashboard():
                 ("Reps", "@Reps"),
                 ("Weight", "@Weight"),
                 ("Est. 1 RM", "@{Est. 1 RM}"),
+                ("Date", "@{Workout Date}"),
             ]
             
             fig1 = figure(
