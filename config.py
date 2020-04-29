@@ -1,4 +1,4 @@
-import instance.config as cfg
+import os
 
 class Config:
-    SECRET_KEY = cfg.SECRET_KEY
+    SECRET_KEY =  os.environ.get('SECRET_KEY', None)
