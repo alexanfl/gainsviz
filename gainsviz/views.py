@@ -100,8 +100,8 @@ def about():
     return render_template("about.html", title="gains::viz")
 
 
-@app.route("/uploader", methods=["GET", "POST"])
-def uploader():
+@app.route("/dashboard", methods=["GET", "POST"])
+def dashboard():
     if request.method == "POST":
         f = request.files["file"]
         if not f:
