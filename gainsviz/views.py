@@ -107,7 +107,7 @@ def uploader():
             flash("No file selected", "danger")
             return redirect(url_for("index"))
         if not f.content_type == "text/csv":
-            flash("Invalid file format", "danger")
+            flash(f"Invalid file format {f.content_type}", "danger")
             return redirect(url_for("index"))
 
 
