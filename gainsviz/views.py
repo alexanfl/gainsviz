@@ -22,6 +22,7 @@ PLT_WIDTH = 900
 
 PRIMARY_COLOR_LIGHT = "#f38869"
 SECONDARY_COLOR = "#41b3a3"
+MIME_TYPES = ("text/csv", "text/comma-separated-values")
 
 
 def color_gen(num_colors=3):
@@ -106,8 +107,8 @@ def uploader():
         if not f:
             flash("No file selected", "danger")
             return redirect(url_for("index"))
-        if not f.content_type == "text/csv":
-            flash(f"Invalid file format {f.content_type}", "danger")
+        if (mimetype := f.mimetype) not in MIME_TYPES:
+            flash(f"Invalid file format {mimetype}", "danger")
             return redirect(url_for("index"))
 
 
