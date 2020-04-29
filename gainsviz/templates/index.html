@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block body %}
+  <form class="centered-content" action="/uploader" method="POST" 
+        enctype = "multipart/form-data">
+    <div class="btn upload-btn-wrapper">
+      <input style="cursor: pointer;" type="file" name="file" onchange="form.submit()">
+        Choose file
+      </input>
+    </div>
+    <div class="container"> 
+      <!-- <label for="textbox">Text</label> -->
+      <input class="txt" type="text" name="textbox"/>
+    </div> 
+  </form>   
+{% endblock %}

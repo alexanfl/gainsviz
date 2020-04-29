@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <title>{{ title }}</title>
+  <head>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon-128.png') }}" sizes="32x32" />
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    {% block head %}
+    {% endblock %}
+  </head>
+  <body>
+	<div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+        <div id="alert-{{ loop.index }}" class="alert alert-{{ category }} custom-alert fade show" role="alert">
+          {{message}}
+          <button type="button" class="close" data-dismiss="alert" onclick="getElementById('alert-{{ loop.index }}').style.display = 'none';" aria-label="Close">
+              <span aria-hidden="true">
+                &times;
+              </span>
+          </button>
+        </div>
+      {% endfor %}
+      {% endif %}
+    {% endwith %}
+	</div>
+    <div class="navbar">
+      <div class="navbrand">
+        <a href="/">{{ title }}</a>
+      </div>
+      <div class="navbar-right">
+        <a class="btn" href="/">home</a>
+        <a class="btn" href="/about">about</a>
+      </div>
+    </div>
+    <div class="content">
+        {% block body %}{% endblock %}
+    </div>
+  </body>
+</html>
