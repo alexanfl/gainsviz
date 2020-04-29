@@ -111,9 +111,6 @@ def dashboard():
             flash(f"Invalid file format {mimetype}", "danger")
             return redirect(url_for("index"))
 
-
-        # f.save(secure_filename(f.filename))
-
         df = pd.read_csv(f, sep=";")
         df.loc[:, "Date"] = pd.to_datetime(df["Date"]).dt.date
         # df.set_index(pd.DatetimeIndex(df["Date"]).floor("D"), inplace=True)
@@ -128,16 +125,6 @@ def dashboard():
             df_ex.loc[:, "Set Volume"] = df_ex["Weight"]*df_ex["Reps"]
             df_ex.loc[:, "Est. 1 RM"] = df_ex.apply(
                     lambda x: get_1rm(x["Weight"], x["Reps"]), axis=1)
-            
-            # grouper1 = df_ex.groupby("Date")
-            # d1 = grouper1["Set Volume"].sum().to_frame(
-            #         name="Total Weekly Volume").reset_index()
-
-            # grouper2 = df_ex.groupby("Date")
-            # d2 = grouper2["Est. 1 RM"].max().to_frame(
-            #         name="Est. 1 RM").reset_index()
-            # d2.loc[:, "Total Weekly Volume"] = d1["Total Weekly Volume"]
-            # d2.index = pd.to_datetime(d2["Date"])
 
             d = df_ex.groupby("Date")[["Set Volume", "Est. 1 RM"]].agg(
                     {
