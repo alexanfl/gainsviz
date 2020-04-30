@@ -1,4 +1,6 @@
 from gainsviz import app
+import gainsviz.models as models
+
 import itertools
 import uuid
 import numpy as np
@@ -22,50 +24,8 @@ PLT_WIDTH = 900
 
 PRIMARY_COLOR_LIGHT = "#f38869"
 SECONDARY_COLOR = "#41b3a3"
+
 MIME_TYPES = ("text/csv", "text/comma-separated-values")
-
-
-def color_gen(num_colors=3):
-    yield from itertools.cycle(bokeh.palettes.Colorblind[num_colors])
-
-
-def calculate_1rm_epley(w: float, r: int):
-    """Calculates estimated 1 RM using the Epley formula
-
-    weight w for r reps.
-    """
-
-    if r == 1:
-        return w
-    if r == 0:
-        return 0
-
-    return round(w*(1 + r/30), 2)
-
-
-
-def calculate_1rm_brzycki(w: float, r: int):
-    """Calculates estimated 1 RM using the Epley formula
-
-    weight w for r reps.
-    """
-
-    if r == 0:
-        return 0
-
-    return round(w*36/(37 - r), 2)
-
-def get_1rm(w: float, r: int):
-    if r < 8:
-        return calculate_1rm_brzycki(w, r)
-    elif r > 10:
-        return calculate_1rm_epley(w, r)
-    elif r == 8:
-        return 0.25*calculate_1rm_epley(w, r) + 0.75*calculate_1rm_brzycki(w, r)
-    elif r == 9:
-        return 0.5*calculate_1rm_epley(w, r) + 0.5*calculate_1rm_brzycki(w, r)
-    elif r == 10:
-        return 0.75*calculate_1rm_epley(w, r) + 0.25*calculate_1rm_brzycki(w, r)
 
 
 def style_fig(fig):
@@ -122,7 +82,7 @@ def dashboard():
             df_ex = df.loc[df["Exercise Name"] == ex].copy()
             df_ex.loc[:, "Set Volume"] = df_ex["Weight"]*df_ex["Reps"]
             df_ex.loc[:, "Est. 1 RM"] = df_ex.apply(
-                    lambda x: get_1rm(x["Weight"], x["Reps"]), axis=1)
+                    lambda x: models.get_1rm(x["Weight"], x["Reps"]), axis=1)
 
             d = df_ex.groupby("Date")[["Set Volume", "Est. 1 RM"]].agg(
                     {
