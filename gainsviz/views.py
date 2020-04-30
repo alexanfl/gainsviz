@@ -32,7 +32,7 @@ def style_fig(fig):
     fig.background_fill_color = "#EAEAF1"
     fig.grid.grid_line_color = "white"
     fig.grid.grid_line_width = 2
-    fig.xaxis.ticker.desired_num_ticks = 8
+    # fig.xaxis.ticker.desired_num_ticks = 8
     fig.yaxis.ticker.desired_num_ticks = 3
     fig.axis.axis_line_color = "white"
     fig.axis.major_tick_line_color = "white"
