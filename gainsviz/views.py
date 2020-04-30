@@ -81,9 +81,12 @@ def dashboard():
         for ex in exercises:
             df_ex = df.loc[df["Exercise Name"] == ex].copy()
             df_ex.loc[:, "Set Volume"] = df_ex["Weight"]*df_ex["Reps"]
+            # Calculate estimated 1 RM of set
             df_ex.loc[:, "Est. 1 RM"] = df_ex.apply(
                     lambda x: models.get_1rm(x["Weight"], x["Reps"]), axis=1)
 
+            # Calculate total volume of set
+            # Group all exercises by date performed on
             d = df_ex.groupby("Date")[["Set Volume", "Est. 1 RM"]].agg(
                     {
                         "Set Volume": "sum", 
@@ -92,8 +95,10 @@ def dashboard():
             d.columns = d.columns.droplevel()
             d.dropna(inplace=True)
 
+            # Get Reps/Weight of the maximal 1 RM value of each date
             d.loc[:, "Reps"] = df_ex.loc[d["idxmax"], "Reps"].values
             d.loc[:, "Weight"] = df_ex.loc[d["idxmax"], "Weight"].values
+
             d.index = pd.to_datetime(d.index)
             d.rename(
                     columns={"max": "Est. 1 RM", "sum": "Total Daily Volume"}, 
@@ -101,6 +106,7 @@ def dashboard():
             d2 = d.resample("D").asfreq(0)
             d2.drop(columns="idxmax", inplace=True)
             
+            # Group all workouts by week (starting on Monday)
             d3 = d2.resample("W-MON").agg(
                     {
                         "Total Daily Volume": "sum", 
@@ -108,9 +114,13 @@ def dashboard():
                     })
             d3.columns = d3.columns.droplevel()
             d3.fillna(0, inplace=True)
+
+
+            # Get Reps/Weight/Workout Date of the maximal 1 RM value of week
             d3.loc[:, "Reps"] = d2.loc[d3["idxmax"], "Reps"].values
             d3.loc[:, "Weight"] = d2.loc[d3["idxmax"], "Weight"].values
             d3.loc[:, "Workout Date"] = d3["idxmax"].dt.strftime("%d %B %Y")
+
             d3.drop(columns="idxmax", inplace=True)
             d3.rename(
                     columns={"max": "Est. 1 RM", "sum": "Total Weekly Volume"}, 
