@@ -2,6 +2,7 @@
     --primary-color: #e27d60;
     --primary-color-dark: #d2765a;
     --primary-color-light: #f38869;
+    --primary-color-extra-light: #ffb19a;
     --secondary-color: #41b3a3;
     --tertiary-color: #85cdcb;
     --quaternary-color: #c38d9e;
@@ -17,7 +18,11 @@ body {
 }
 
 .pushdown {
-  margin: 5em 0;
+  margin: 2em 0;
+}
+
+.pushaway {
+  margin: 0 1em;
 }
 
 .content {
@@ -67,6 +72,11 @@ body {
 }
 
 .container {
+  padding: 1em;
+}
+
+.inline-container {
+  display: inline-flex;
   padding: 1em;
 }
 
@@ -215,11 +225,11 @@ body {
 
 .radio-toolbar label {
     display: inline-block;
-    background-color: var(--primary-color);
+    background-color: var(--primary-color-light);
     padding: 10px 20px;
     font-family: sans-serif, Arial;
     font-size: 16px;
-    border: 2px solid transparent;
+    border: 3px solid transparent;
     border-radius: 8px 8px 0;
 }
 
@@ -229,12 +239,22 @@ body {
 /* } */
 
 .radio-toolbar input[type="radio"]:checked + label {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color-light);
+    background-color: var(--primary-color-light);
+    border-color: var(--primary-color-extra-light);
 }
+
 
 @media only screen and (min-width: 1200px) {
   .main-container {
     padding: 2.5em 5em;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .pushaway {
+    margin: 0;
+  }
+  .radio-toolbar > .pushaway > label {
+    border-radius: 0;
   }
 }
