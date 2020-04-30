@@ -105,6 +105,7 @@ def dashboard():
                     lambda x: models.get_volume(
                         x["Weight"], x["Reps"], x["Workout 1 RM"], cutoff=cutoff), 
                     axis=1)
+
             # Group all exercises by date performed on
             d = df_ex.groupby("Date")[["Set Volume", "Est. 1 RM"]].agg(
                     {
@@ -148,7 +149,6 @@ def dashboard():
             d3.loc[d3["Est. 1 RM"] == 0, "Est. 1 RM"] = None
 
             source = ColumnDataSource(d3)
-            colors = color_gen()
 
             hover = HoverTool()
             hover.tooltips=[
