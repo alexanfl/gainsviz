@@ -64,6 +64,17 @@ def about():
 def dashboard():
     if request.method == "POST":
         f = request.files["file"]
+        unit = request.form["unit"]
+        try:
+            cutoff = float(request.form["cutoff"])/100
+        except Exception as e:
+            print(e)
+            cutoff = -1
+
+        if cutoff < 0 or cutoff > 1:
+            flash(f"Invalid cutoff percentage", "danger")
+            return redirect(url_for("index"))
+
         if not f:
             flash("No file selected", "danger")
             return redirect(url_for("index"))
