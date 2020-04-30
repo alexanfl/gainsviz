@@ -73,3 +73,26 @@ def get_volume(w: float, r: int, w_max: float, cutoff: float = 0.):
         return 0
 
     return w*r
+
+
+def style_fig(fig):
+    fig.background_fill_color = "#EAEAF1"
+    fig.grid.grid_line_color = "white"
+    fig.grid.grid_line_width = 2
+    # fig.xaxis.ticker.desired_num_ticks = 8
+    fig.yaxis.ticker.desired_num_ticks = 3
+    fig.axis.axis_line_color = "white"
+    fig.axis.major_tick_line_color = "white"
+    fig.axis.minor_tick_line_color = "white"
+    # fig.border_fill_color = SECONDARY_COLOR
+    # fig.axis.major_label_text_color = "white"
+    # fig.title.text_color = "white"
+    # fig.toolbar.autohide = True
+
+    # Remove Bokeh help tool
+    fig.toolbar.tools.pop(-1)
+    # Turn of pan/drag by default
+    fig.toolbar.active_drag = None
+    fig.sizing_mode = "scale_both"
+
+    return fig

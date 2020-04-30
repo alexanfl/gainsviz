@@ -28,30 +28,6 @@ SECONDARY_COLOR = "#41b3a3"
 MIME_TYPES = ("text/csv", "text/comma-separated-values")
 
 
-def style_fig(fig):
-    fig.background_fill_color = "#EAEAF1"
-    fig.grid.grid_line_color = "white"
-    fig.grid.grid_line_width = 2
-    # fig.xaxis.ticker.desired_num_ticks = 8
-    fig.yaxis.ticker.desired_num_ticks = 3
-    fig.axis.axis_line_color = "white"
-    fig.axis.major_tick_line_color = "white"
-    fig.axis.minor_tick_line_color = "white"
-    # fig.border_fill_color = SECONDARY_COLOR
-    # fig.axis.major_label_text_color = "white"
-    # fig.title.text_color = "white"
-    # fig.toolbar.autohide = True
-
-    # Remove Bokeh help tool
-    fig.toolbar.tools.pop(-1)
-    # Turn of pan/drag by default
-    fig.toolbar.active_drag = None
-    fig.sizing_mode = "scale_both"
-
-    return fig
-
-
-
 @app.route("/")
 def index():
     return render_template("index.html", title="gains::viz")
@@ -180,7 +156,7 @@ def dashboard():
                     color=SECONDARY_COLOR,
                     size=5)
 
-            fig1 = style_fig(fig1)
+            fig1 = models.style_fig(fig1)
 
             fig2 = figure(
                     title="Est. 1 RM",
@@ -194,7 +170,7 @@ def dashboard():
                     source=source,
                     color=PRIMARY_COLOR_LIGHT,
                     size=5)
-            fig2 = style_fig(fig2)
+            fig2 = models.style_fig(fig2)
             fig2.add_tools(hover)
 
             tab = Panel(child=column(fig1, fig2, sizing_mode="scale_both"), title=ex)
