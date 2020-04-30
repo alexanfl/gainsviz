@@ -87,7 +87,6 @@ def dashboard():
         unique_exercises = list(df["Exercise Name"].value_counts().index)
 
         tabs = []
-        # exercises = unique_exercises[:7]
         exercises = unique_exercises
         for ex in exercises:
             df_ex = df.loc[df["Exercise Name"] == ex].copy()
