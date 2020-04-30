@@ -84,6 +84,14 @@ def dashboard():
 
         df = pd.read_csv(f, sep=";")
         df.loc[:, "Date"] = pd.to_datetime(df["Date"]).dt.date
+
+        df.loc[df["Weight Unit"] != unit, "Weight"] \
+                = df.loc[df["Weight Unit"] != unit, :].apply(
+                        lambda x: models.weight_conversion[unit](x["Weight"]), 
+                        axis=1)
+        df["Weight"].fillna(1, inplace=True)
+        df["Weight"].replace(0, 1, inplace=True)
+
         unique_exercises = list(df["Exercise Name"].value_counts().index)
 
         tabs = []
