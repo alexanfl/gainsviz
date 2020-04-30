@@ -160,6 +160,7 @@ def dashboard():
             
             fig1 = figure(
                     title="Total Weekly Volume",
+                    y_axis_label=f"Weight [{unit}]",
                     width=PLT_WIDTH, 
                     height=PLT_HEIGHT,
                     x_axis_type="datetime")
@@ -173,6 +174,7 @@ def dashboard():
 
             fig2 = figure(
                     title="Est. 1 RM",
+                    y_axis_label=f"Weight [{unit}]",
                     width=PLT_WIDTH, 
                     height=PLT_HEIGHT,
                     x_axis_type="datetime")
