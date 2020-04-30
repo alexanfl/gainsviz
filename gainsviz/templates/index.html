@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block body %}
-  <form class="centered-content" action="/dashboard" method="POST" 
+  <form class="pushdown" action="/dashboard" method="POST" 
         enctype = "multipart/form-data">
     <div class="container radio-toolbar">
       <input type="radio" id="kg" name="unit" value="kg" checked>
@@ -12,7 +12,10 @@
       <label for="cutoff">Volume cutoff</label>
       <span>
         <input class="txt" type="number" min="0" max="100" value="60" name="cutoff"/>
-        <b>%</b> of 1 RM
+        <b>%</b> of 1 RM 
+      </span>
+      <span title="Percentage of the estimated 1 RM of the workout. Sets with estimated 1 RM less than this will not be counted as volume.">
+        <b>&#9432;</b>
       </span>
     </div> 
     <div class="container">

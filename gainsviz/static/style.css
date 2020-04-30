@@ -16,6 +16,10 @@ body {
   margin: 0;
 }
 
+.pushdown {
+  margin: 5em 0;
+}
+
 .content {
   height: 80vh;
   display: flex;
@@ -28,6 +32,7 @@ body {
   text-align: center;
   align-content: space-between;
   flex-direction: column;
+  margin: 1rm;
 }
 
 .upload-btn-wrapper {
@@ -62,6 +67,10 @@ body {
 }
 
 .container {
+  padding: 1em;
+}
+
+.main-container {
   padding: 1em;
 }
 
@@ -222,4 +231,10 @@ body {
 .radio-toolbar input[type="radio"]:checked + label {
     background-color: var(--primary-color);
     border-color: var(--primary-color-light);
+}
+
+@media only screen and (min-width: 1200px) {
+  .main-container {
+    padding: 2.5em 5em;
+  }
 }

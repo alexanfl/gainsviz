@@ -19,8 +19,8 @@ from bokeh.embed import components
 import bokeh.palettes
 
 
-PLT_HEIGHT = 250
-PLT_WIDTH = 900
+PLT_HEIGHT = 300
+PLT_WIDTH = 1500
 
 PRIMARY_COLOR_LIGHT = "#f38869"
 SECONDARY_COLOR = "#41b3a3"
@@ -168,8 +168,9 @@ def dashboard():
             fig1 = figure(
                     title="Total Weekly Volume",
                     y_axis_label=f"Weight [{unit}]",
-                    width=PLT_WIDTH, 
-                    height=PLT_HEIGHT,
+                    # width=PLT_WIDTH, 
+                    # height=PLT_HEIGHT,
+                    aspect_ratio=PLT_WIDTH/PLT_HEIGHT,
                     x_axis_type="datetime")
             fig1.circle(
                     x="Date", y="Total Weekly Volume",
@@ -182,8 +183,9 @@ def dashboard():
             fig2 = figure(
                     title="Est. 1 RM",
                     y_axis_label=f"Weight [{unit}]",
-                    width=PLT_WIDTH, 
-                    height=PLT_HEIGHT,
+                    # width=PLT_WIDTH, 
+                    # height=PLT_HEIGHT,
+                    aspect_ratio=PLT_WIDTH/PLT_HEIGHT,
                     x_axis_type="datetime")
             fig2.circle(
                     x="Date", y="Est. 1 RM",
@@ -193,10 +195,10 @@ def dashboard():
             fig2 = style_fig(fig2)
             fig2.add_tools(hover)
 
-            tab = Panel(child=column(fig1, fig2), title=ex)
+            tab = Panel(child=column(fig1, fig2, sizing_mode="scale_both"), title=ex)
             tabs.append(tab)
 
-        div, script = components(Tabs(tabs=tabs))
+        div, script = components(Tabs(tabs=tabs, max_width=PLT_WIDTH))
         
         return render_template("dashboard.html", 
                 title="gains::viz",
