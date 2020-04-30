@@ -113,8 +113,6 @@ def dashboard():
 
         df = pd.read_csv(f, sep=";")
         df.loc[:, "Date"] = pd.to_datetime(df["Date"]).dt.date
-        # df.set_index(pd.DatetimeIndex(df["Date"]).floor("D"), inplace=True)
-        # df.drop(columns="Date", inplace=True)
         unique_exercises = list(df["Exercise Name"].value_counts().index)
 
         tabs = []
