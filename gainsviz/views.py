@@ -185,3 +185,5 @@ def dashboard():
                 title="gains::viz",
                 div=div, 
                 script=script) 
+
+    return redirect(url_for("index"))
