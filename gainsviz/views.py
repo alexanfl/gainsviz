@@ -108,7 +108,6 @@ def dashboard():
                     "Date")["Est. 1 RM"].transform("max")
 
             # Calculate total volume of set
-            # df_ex.loc[:, "Set Volume"] = df_ex["Weight"]*df_ex["Reps"]
             df_ex.loc[:, "Set Volume"] = df_ex.apply(
                     lambda x: models.get_volume(
                         x["Weight"], x["Reps"], x["Workout 1 RM"], cutoff=cutoff), 
