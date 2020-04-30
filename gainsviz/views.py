@@ -44,6 +44,8 @@ def style_fig(fig):
 
     # Remove Bokeh help tool
     fig.toolbar.tools.pop(-1)
+    # Turn of pan/drag by default
+    fig.toolbar.active_drag = None
     fig.sizing_mode = "scale_both"
 
     return fig
