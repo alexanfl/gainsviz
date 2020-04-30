@@ -1,3 +1,5 @@
+from math import ceil
+
 LBS_IN_KG = 2.2046226218
 
 
@@ -12,6 +14,13 @@ def kg_to_lbs(weight: float):
 weight_conversion = {
         "lbs": lbs_to_kg,
         "kg": kg_to_lbs
+        }
+
+quantity_conversion = {
+        "few": lambda x: min(8, x),
+        "medium": lambda x: ceil(0.25*x),
+        "many": lambda x: ceil(0.5*x),
+        "all": lambda x: None
         }
 
 

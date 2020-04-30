@@ -43,6 +43,7 @@ def dashboard():
     if request.method == "POST":
         f = request.files["file"]
         unit = request.form["unit"]
+        exercise_quantity = request.form["exercise_quantity"]
         try:
             cutoff = float(request.form["cutoff"])/100
         except Exception as e:
@@ -71,9 +72,11 @@ def dashboard():
         df["Weight"].replace(0, 1, inplace=True)
 
         unique_exercises = list(df["Exercise Name"].value_counts().index)
+        exercise_slice = models.quantity_conversion[exercise_quantity](
+                len(unique_exercises))
 
         tabs = []
-        exercises = unique_exercises
+        exercises = unique_exercises[:exercise_slice]
         for ex in exercises:
             df_ex = df.loc[df["Exercise Name"] == ex].copy()
 
