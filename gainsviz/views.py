@@ -90,12 +90,21 @@ def dashboard():
         exercises = unique_exercises
         for ex in exercises:
             df_ex = df.loc[df["Exercise Name"] == ex].copy()
-            df_ex.loc[:, "Set Volume"] = df_ex["Weight"]*df_ex["Reps"]
+
+            
             # Calculate estimated 1 RM of set
             df_ex.loc[:, "Est. 1 RM"] = df_ex.apply(
                     lambda x: models.get_1rm(x["Weight"], x["Reps"]), axis=1)
 
+            df_ex["Workout 1 RM"] = df_ex.groupby(
+                    "Date")["Est. 1 RM"].transform("max")
+
             # Calculate total volume of set
+            # df_ex.loc[:, "Set Volume"] = df_ex["Weight"]*df_ex["Reps"]
+            df_ex.loc[:, "Set Volume"] = df_ex.apply(
+                    lambda x: models.get_volume(
+                        x["Weight"], x["Reps"], x["Workout 1 RM"], cutoff=cutoff), 
+                    axis=1)
             # Group all exercises by date performed on
             d = df_ex.groupby("Date")[["Set Volume", "Est. 1 RM"]].agg(
                     {
