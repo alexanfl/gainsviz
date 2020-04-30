@@ -2,14 +2,25 @@
 {% block body %}
   <form class="centered-content" action="/dashboard" method="POST" 
         enctype = "multipart/form-data">
-    <div class="btn upload-btn-wrapper">
-      <input style="cursor: pointer;" type="file" name="file" onchange="form.submit()">
-        Choose file
-      </input>
+    <div class="container radio-toolbar">
+      <input type="radio" id="kg" name="unit" value="kg" checked>
+      <label for="kg">kg</label>
+      <input type="radio" id="lbs" name="unit" value="lbs">
+      <label for="lbs">lbs</label>
     </div>
     <div class="container"> 
-      <!-- <label for="textbox">Text</label> -->
-      <input class="txt" type="text" name="textbox"/>
+      <label for="cutoff">Volume cutoff</label>
+      <span>
+        <input class="txt" type="number" min="0" max="100" value="60" name="cutoff"/>
+        <b>%</b> of 1 RM
+      </span>
     </div> 
+    <div class="container">
+      <div class="btn upload-btn-wrapper">
+        <input style="cursor: pointer;" type="file" name="file" onchange="form.submit()">
+          Choose file
+        </input>
+      </div>
+    </div>
   </form>   
 {% endblock %}
