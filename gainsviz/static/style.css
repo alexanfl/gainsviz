@@ -4,7 +4,8 @@
     --primary-color-light: #f38869;
     --primary-color-extra-light: #ffb19a;
     --secondary-color: #41b3a3;
-    --tertiary-color: #85cdcb;
+    --secondary-color-light: #85cdcb;
+    --tertiary-color: #e8a87c;
     --quaternary-color: #c38d9e;
 
     --dark-gray: #1a1a1d;
@@ -64,8 +65,8 @@ body {
   border: none;
   color: black;
   background-color: white;
-  padding: 0.75em 1em;
-  border-radius: 0 16px 16px 16px;
+  padding: 0.75em .5em;
+  border-radius: 16px 16px 16px 0;
   font-size: 20px;
   font-weight: bold;
   text-align: center;
@@ -293,6 +294,10 @@ body {
     border-radius: 8px 8px 0;
 }
 
+.radio-toolbar label:hover{
+  background-color: var(--primary-color);
+}
+
 
 /* .radio-toolbar input[type="radio"]:focus + label { */
 /*     border: 2px dashed #444; */
@@ -317,4 +322,10 @@ body {
   .radio-toolbar > .pushaway > label {
     border-radius: 0;
   }
+}
+
+input:focus {
+  outline-color: var(--tertiary-color);
+  outline-width: medium;
+  outline-offset: 0.1em;
 }
