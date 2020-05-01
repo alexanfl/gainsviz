@@ -43,8 +43,8 @@ def about():
     return render_template("about.html", title="gains::viz")
 
 
-@app.route("/dashboard", methods=["GET", "POST"])
-def dashboard():
+@app.route("/gains", methods=["GET", "POST"])
+def gains():
     if request.method == "POST":
         f = request.files["file"]
         unit = request.form["unit"]
@@ -186,7 +186,7 @@ def dashboard():
 
         div, script = components(Tabs(tabs=tabs, max_width=PLT_WIDTH))
         
-        return render_template("dashboard.html", 
+        return render_template("gains.html", 
                 title="gains::viz",
                 div=div, 
                 script=script) 
