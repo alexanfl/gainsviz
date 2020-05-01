@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block body %}
+  <form class="pushdown" action="/dashboard" method="POST" 
+        enctype = "multipart/form-data">
+    <div>
+      Weight unit
+    </div>
+    <div class="container inline-container radio-toolbar">
+      <div class="pushaway">
+        <input type="radio" id="kg" name="unit" value="kg" checked>
+        <label for="kg">kg</label>
+      </div>
+      <div class="pushaway">
+        <input type="radio" id="lbs" name="unit" value="lbs">
+        <label for="lbs">lbs</label>
+      </div>
+    </div>
+    <div>
+      Volume cutoff
+      <span title="Percentage of the estimated 1 RM of the workout. Sets with estimated 1 RM less than this will not be counted as volume.">
+        <b>&#9432;</b>
+      </span>
+    </div>
+    <div class="container"> 
+      <span>
+        <input class="txt" type="number" min="0" max="100" value="60" name="cutoff"/>
+        <b>%</b> 
+      </span>
+    </div> 
+    <div>
+      Number of exercises
+      <span title="The higher, the slower to load. The exercise selection is based on the number of total sets of each exercise.">
+        <b>&#9432;</b>
+      </span>
+    </div>
+    <div class="inline-container radio-toolbar">
+      <div class="pushaway">
+        <input type="radio" id="few" name="exercise_quantity" value="few" checked>
+        <label for="few">few</label>
+      </div>
+      <div class="pushaway">
+        <input type="radio" id="medium" name="exercise_quantity" value="medium">
+        <label for="medium">medium</label>
+      </div>
+      <div class="pushaway">
+        <input type="radio" id="many" name="exercise_quantity" value="many">
+        <label for="many">many</label>
+      </div>
+      <div class="pushaway">
+        <input type="radio" id="all" name="exercise_quantity" value="all">
+        <label for="all">all</label>
+      </div>
+    </div>
+    <div class="container">
+      <div class="btn upload-btn-wrapper">
+        <input type="file" name="file" onchange="form.submit()">
+          Choose .csv file
+        </input>
+      </div>
+    </div>
+  </form>   
+{% endblock %}

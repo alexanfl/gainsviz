@@ -33,6 +33,11 @@ def index():
     return render_template("index.html", title="gains::viz")
 
 
+@app.route("/viz")
+def viz():
+    return render_template("viz.html", title="gains::viz")
+
+
 @app.route("/about")
 def about():
     return render_template("about.html", title="gains::viz")
@@ -52,14 +57,14 @@ def dashboard():
 
         if cutoff < 0 or cutoff > 1:
             flash(f"Invalid cutoff percentage", "danger")
-            return redirect(url_for("index"))
+            return redirect(url_for("viz"))
 
         if not f:
             flash("No file selected", "danger")
-            return redirect(url_for("index"))
+            return redirect(url_for("viz"))
         if (mimetype := f.mimetype) not in MIME_TYPES:
             flash(f"Invalid file format {mimetype}", "danger")
-            return redirect(url_for("index"))
+            return redirect(url_for("viz"))
 
         df = pd.read_csv(f, sep=";")
         df.loc[:, "Date"] = pd.to_datetime(df["Date"]).dt.date
@@ -186,4 +191,4 @@ def dashboard():
                 div=div, 
                 script=script) 
 
-    return redirect(url_for("index"))
+    return redirect(url_for("viz"))
