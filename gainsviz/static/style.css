@@ -105,13 +105,80 @@ body {
   justify-content: space-between;
 }
 
+#menu_show_hide {
+	position:absolute;
+	left:-999em;
+}
+
+#menu {
+	list-style:none;
+	text-align:center;
+	padding:0.25em 0;
+	margin-bottom:1em;
+}
+
+#menu li {
+	display:inline;
+}
+
+#menu a {
+	display:inline-block;
+	padding:0.25em 1em;
+	text-decoration:none;
+}
+
+@media (max-width:38em) {
+	body {
+		padding:0;
+	}
+	#menu {
+		display:none;
+		overflow:hidden; /* wrap floats and margins */
+		padding:0.25em;
+	}
+	#menu li {
+		float:left;
+		width:50%;
+	}
+	#menu a {
+		display:block;
+		padding:0.75em;
+		margin:0.25em;
+	}
+	#menu_show_hide + label {
+		display:block;
+		padding:1em;
+		margin-bottom:1em;
+		text-align:center;
+		font-weight:bold;
+	}
+  #menu_show_hide:checked + label,
+	#menu_show_hide + label:active,
+	#menu_show_hide + label:focus,
+	#menu_show_hide + label:hover {
+		background: var(--primary-color);
+	}
+	#menu_show_hide + label:before {
+		content: "\2630";
+	}
+	#menu_show_hide:checked + label {
+		margin:0;
+	}
+	#menu_show_hide:checked + label:before {
+		content: "\2630";
+	}
+	#menu_show_hide:checked ~ #menu {
+		display:block;
+	}
+}
+
 .navbrand {
   text-align: center;
   font-size: 42px;
   font-weight: bold;
 }
 
-.navbar-right {
+#menu {
   text-align: center;
 }
 
@@ -119,22 +186,15 @@ body {
   padding: 0.25em 0.5em;
 }
 
-.navbar > .navbar-right {
-  padding: 1em 0.5em;
-}
 
-.navbar-right > a:hover {
-  background-color: var(--primary-color);
-}
-
-.navbar > .navbrand:hover {
-  background-color: transparent;
-} 
-
-.navbar > a, .navbrand > a, .navbar-right > a {
+.navbrand > a { 
   color: white;
   text-decoration: none;
   font-weight: bold;
+}
+
+#menu > li > a:hover {
+  background-color: var(--primary-color);
 }
 
 .bk-tab {
