@@ -34,10 +34,19 @@
       <div class="navbrand">
         <a href="/">{{ title }}</a>
       </div>
-      <div class="navbar-right">
-        <a class="btn" href="/">home</a>
-        <a class="btn" href="/about">about</a>
-      </div>
+      <input type="checkbox" id="menu_show_hide">
+      <label for="menu_show_hide"></label>
+      <ul class="navbar-right" id="menu">
+        <li>
+          <a class="btn" href="/">home</a>
+        </li>
+        <li>
+          <a class="btn" href="/viz">viz</a>
+        </li>
+        <li>
+          <a class="btn" href="/about">about</a>
+        </li>
+      </ul>
     </div>
     <div class="centered-content main-container">
         {% block body %}{% endblock %}
